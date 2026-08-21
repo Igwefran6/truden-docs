@@ -1,0 +1,119 @@
+---
+title: Trigger Mechanisms
+description: Explore all 5 built-in trigger mechanisms, gesture thresholds, and disabling options.
+---
+
+Truden supports **5 trigger mechanisms** out of the box, in addition to direct programmatic control. All triggers funnel through the same shared capture overlay and can be individually configured or disabled.
+
+---
+
+## 1. Alt + Mouse Shake (Signature Gesture)
+
+Hold the **Alt** key and shake your mouse horizontally.
+
+- **How it works:** Truden tracks horizontal direction reversals while `Alt` is held. When the reversal threshold is reached within the time window, the overlay opens automatically.
+- **Enabled by default.**
+
+```ts
+truden.init({
+  shake: {
+    reversals: 4,     // Number of direction reversals required (default: 4)
+    window: 800,      // Sliding time window in ms (default: 800)
+    minDistance: 20,  // Minimum movement in px before counting (default: 20)
+  },
+  // or disable: shake: false
+});
+```
+
+---
+
+## 2. Keyboard Shortcut
+
+Press a configurable key combination anywhere in your application.
+
+- **Default:** `Ctrl+Shift+S` (accepts `Cmd+Shift+S` on macOS).
+- Automatically prevents default browser keystrokes into active inputs.
+
+```ts
+truden.init({
+  shortcut: "Ctrl+Shift+S", // Custom combo, e.g. "Alt+S", "Mod+K"
+  // or disable: shortcut: false
+});
+```
+
+---
+
+## 3. Floating Trigger Button (Opt-in UI)
+
+Injects a customizable floating trigger button into the corner of your page.
+
+- **Disabled by default.**
+
+```ts
+truden.init({
+  floatingButton: {
+    position: "bottom-right", // "bottom-right" | "bottom-left" | "top-right" | "top-left"
+    label: "Snip Screen",     // Optional text label
+    className: "custom-btn",  // Optional CSS class
+  },
+});
+```
+
+---
+
+## 4. Custom DOM Event
+
+Dispatch a namespaced browser event (`truden:open`) from anywhere in your codebase.
+
+```ts
+// Initialize
+truden.init({ customEvent: "truden:open" });
+
+// Anywhere in your app:
+window.dispatchEvent(new CustomEvent("truden:open"));
+```
+
+---
+
+## 5. Touch Long-Press (Mobile / Tablet)
+
+Press and hold anywhere on a touchscreen device for 600ms.
+
+```ts
+truden.init({
+  touch: {
+    duration: 600,    // Hold duration in ms (default: 600)
+    maxDistance: 10,  // Scroll cancellation threshold in px (default: 10)
+  },
+  // or disable: touch: false
+});
+```
+
+---
+
+## 6. Programmatic Trigger: `truden.open()`
+
+```ts
+import truden from "truden";
+
+truden.open();
+```
+
+---
+
+## Disabling Triggers
+
+Any default trigger can be completely disabled by passing `false`:
+
+```ts
+truden.init({
+  shake: false,
+  shortcut: false,
+  touch: false,
+  customEvent: false,
+  onResult: (blob) => { ... },
+});
+
+// Now the overlay only opens when you call:
+// truden.open();
+```

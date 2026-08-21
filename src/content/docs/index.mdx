@@ -1,40 +1,37 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: AI Visual Context
+description: Instant high-DPI screen snipping overlay and Vision LLM adapters for web applications.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Truden is an instant, easy to use visual context for AI. Embed a high-DPI screen snipping overlay into any web app with zero friction.
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/truden-logo-gradient.svg
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: /getting-started/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/Igwefran6/truden
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Features
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+  <Card title="5 Built-in Triggers" icon="rocket">
+    Trigger the snip overlay with Alt+Shake mouse gesture, configurable keyboard shortcuts, touchscreen hold, floating button, or custom DOM events.
+  </Card>
+  <Card title="Powered by SnapDOM" icon="puzzle">
+    High-fidelity DOM rasterization with native support for video frames, canvases, nested iframes, custom web fonts, and sub-pixel reconciliation.
+  </Card>
+  <Card title="Mode A & Mode B" icon="seti:graphql">
+    Direct raw image Blobs to your frontend AI chat copilot or POST to server Vision LLM adapters (Vercel AI SDK, OpenAI, Anthropic, OpenRouter).
+  </Card>
+  <Card title="100% Framework Agnostic" icon="open-book">
+    Standard Web APIs compliance means drop-in compatibility across React, Next.js, Svelte, Vue, Angular, TanStack Start, SolidJS, and Vanilla JS.
+  </Card>
 </CardGrid>

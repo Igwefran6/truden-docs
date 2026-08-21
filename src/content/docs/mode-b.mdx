@@ -1,0 +1,119 @@
+---
+title: "Mode B: Server Vision Adapter"
+description: Automatically analyze captured screenshots using Vision LLMs with any backend AI SDK.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+**Mode B** automatically sends captured screenshots to a backend route handler that analyzes the image with a Vision LLM and returns a textual description.
+
+---
+
+## How It Works
+
+1. User selects a region on the screen.
+2. Truden captures the image and POSTs it as `multipart/form-data` to your configured `endpoint`.
+3. Your server handler runs your custom `analyze` function using **any AI SDK** (Vercel AI SDK, OpenAI, Anthropic, OpenRouter, Gemini, Ollama).
+4. The server responds with `{ description: "..." }`.
+5. Truden passes the description string to your client's `onResult(description)` callback.
+
+```
+Client Snip ───► POST /api/truden ───► Vision LLM ───► { description } ───► Client onResult(text)
+```
+
+---
+
+## Server Route Handler Recipes
+
+<Tabs>
+  <TabItem label="Next.js App Router">
+```ts
+// app/api/truden/route.ts
+import { handler } from "truden/server";
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
+
+export const POST = handler({
+  analyze: async ({ image, prompt }) => {
+    const { text } = await generateText({
+      model: openai("gpt-4o"),
+      messages: [{ role: "user", content: [{ type: "image", image }, { type: "text", text: prompt }] }],
+    });
+    return text;
+  },
+});
+```
+  </TabItem>
+
+  <TabItem label="SvelteKit">
+```ts
+// src/routes/api/truden/+server.ts
+import { handler } from 'truden/server';
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+export const POST = handler({
+  analyze: async ({ image, prompt }) => {
+    const { text } = await generateText({
+      model: openai('gpt-4o'),
+      messages: [{ role: 'user', content: [{ type: 'image', image }, { type: 'text', text: prompt }] }],
+    });
+    return text;
+  },
+});
+```
+  </TabItem>
+
+  <TabItem label="Nuxt 3">
+```ts
+// server/api/truden.post.ts
+import { handler } from 'truden/server';
+import OpenAI from 'openai';
+
+const client = new OpenAI();
+const trudenHandler = handler({
+  analyze: async ({ image, prompt }) => {
+    const res = await client.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: [{ type: "image_url", image_url: { url: image } }, { type: "text", text: prompt }] }]
+    });
+    return res.choices[0]?.message.content || "";
+  }
+});
+
+export default defineEventHandler(async (event) => {
+  return trudenHandler(toWebRequest(event));
+});
+```
+  </TabItem>
+
+  <TabItem label="TanStack Start">
+```ts
+// app/routes/api/truden.ts
+import { createAPIFileRoute } from '@tanstack/start/api';
+import { handler } from 'truden/server';
+
+const trudenHandler = handler({
+  analyze: async ({ image, prompt }) => {
+    return "Vision description from AI";
+  },
+});
+
+export const Route = createAPIFileRoute('/api/truden')({
+  POST: ({ request }) => trudenHandler(request),
+});
+```
+  </TabItem>
+
+  <TabItem label="Node">
+```ts
+import { handler } from "truden/server";
+
+export const handleTruden = handler({
+  analyze: async ({ image, prompt }) => {
+    return "AI Vision Analysis";
+  },
+});
+```
+  </TabItem>
+</Tabs>

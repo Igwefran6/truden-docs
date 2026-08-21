@@ -1,0 +1,26 @@
+/* Truden Primary Color Theme (#D843D8) */
+:root {
+	--sl-color-accent-low: #370e37;
+	--sl-color-accent: #d843d8;
+	--sl-color-accent-high: #f0a3f0;
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: #fbe6fb;
+	--sl-color-accent: #b225b2;
+	--sl-color-accent-high: #540854;
+}
+
+/* Tighten header logo-to-title spacing */
+.site-title {
+	gap: 0.5rem !important;
+}
+
+.site-title img {
+	height: 1.75rem !important;
+	width: auto !important;
+}
+
+.site-title span {
+	color: var(--sl-color-white);
+}

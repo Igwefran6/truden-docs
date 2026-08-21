@@ -6,19 +6,35 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'Truden',
+			logo: {
+				src: './src/assets/truden-logo-gradient.svg',
+			},
+			customCss: ['./src/styles/custom.css'],
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/Igwefran6/truden' }
+			],
 			sidebar: [
 				{
-					label: 'Guides',
+					label: 'Getting Started',
 					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{ label: 'Installation & Quickstart', slug: 'getting-started' },
+						{ label: 'Trigger Mechanisms', slug: 'triggers' },
+					],
+				},
+				{
+					label: 'Core Modes',
+					items: [
+						{ label: 'Mode A: Frontend Copilot', slug: 'mode-a' },
+						{ label: 'Mode B: Server Vision Adapter', slug: 'mode-b' },
 					],
 				},
 				{
 					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
+					items: [
+						{ label: 'API & TypeScript Types', slug: 'api-reference' },
+						{ label: 'Rendering Capabilities & Limits', slug: 'limitations' },
+					],
 				},
 			],
 		}),

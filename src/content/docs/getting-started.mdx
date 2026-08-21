@@ -1,0 +1,341 @@
+---
+title: Installation & Quickstart
+description: Learn how to install Truden and set up your first screen capture trigger in minutes.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+**Truden** lets users hold **Alt** and shake their mouse anywhere in your web app to trigger an interactive screen-snip overlay. The captured region is either:
+
+- Handed directly to your app's AI chat assistant as a raw image attachment (**Mode A**), or
+- Sent to a backend endpoint that analyzes it with a vision LLM and returns a text description (**Mode B**).
+
+---
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+```bash
+npm install truden
+```
+  </TabItem>
+  <TabItem label="pnpm">
+```bash
+pnpm add truden
+```
+  </TabItem>
+  <TabItem label="yarn">
+```bash
+yarn add truden
+```
+  </TabItem>
+  <TabItem label="bun">
+```bash
+bun add truden
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Quickstart: Mode A (Frontend Only)
+
+Mode A requires **zero backend setup** and **no API keys**. The captured image is delivered directly to your client callback as a standard PNG `Blob`.
+
+<Tabs>
+  <TabItem label="React">
+```tsx
+import { useEffect, useState } from "react";
+import truden from "truden";
+
+export default function App() {
+  const [screenshot, setScreenshot] = useState<Blob | null>(null);
+
+  useEffect(() => {
+    return truden.init({
+      onResult: (blob: Blob) => {
+        setScreenshot(blob);
+      },
+    });
+  }, []);
+
+  return (
+    <div>
+      <button onClick={() => truden.open()}>Snip Screen</button>
+      {screenshot && <img src={URL.createObjectURL(screenshot)} alt="Capture" />}
+    </div>
+  );
+}
+```
+  </TabItem>
+
+  <TabItem label="Next.js">
+```tsx
+// app/providers.tsx
+"use client";
+
+import { useEffect } from "react";
+import truden from "truden";
+
+export function TrudenProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    return truden.init({
+      onResult: (blob: Blob) => {
+        console.log("Captured image blob:", blob);
+      },
+    });
+  }, []);
+
+  return <>{children}</>;
+}
+```
+  </TabItem>
+
+  <TabItem label="Svelte">
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import truden from 'truden';
+
+  let previewUrl = $state<string | null>(null);
+
+  onMount(() => {
+    return truden.init({
+      onResult: (blob: Blob) => {
+        previewUrl = URL.createObjectURL(blob);
+      }
+    });
+  });
+</script>
+
+<button onclick={() => truden.open()}>Open Snipper</button>
+{#if previewUrl}
+  <img src={previewUrl} alt="Preview" />
+{/if}
+```
+  </TabItem>
+
+  <TabItem label="Vue">
+```vue
+<!-- App.vue -->
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue';
+import truden from 'truden';
+
+const previewUrl = ref<string | null>(null);
+let teardown: (() => void) | null = null;
+
+onMounted(() => {
+  teardown = truden.init({
+    onResult: (blob: Blob) => {
+      previewUrl.value = URL.createObjectURL(blob);
+    },
+  });
+});
+
+onUnmounted(() => {
+  teardown?.();
+});
+</script>
+```
+  </TabItem>
+
+  <TabItem label="Angular">
+```ts
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import truden from 'truden';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: `<button (click)="openSnipper()">Snip Screen</button>`
+})
+export class AppComponent implements OnInit, OnDestroy {
+  private teardown?: () => void;
+
+  ngOnInit() {
+    this.teardown = truden.init({
+      onResult: (blob: Blob) => console.log('Captured:', blob)
+    });
+  }
+
+  openSnipper() {
+    truden.open();
+  }
+
+  ngOnDestroy() {
+    this.teardown?.();
+  }
+}
+```
+  </TabItem>
+
+  <TabItem label="TanStack">
+```tsx
+// app/routes/__root.tsx
+import { useEffect } from 'react';
+import truden from 'truden';
+
+export function RootComponent() {
+  useEffect(() => {
+    return truden.init({
+      onResult: (blob: Blob) => {
+        console.log('TanStack captured:', blob);
+      },
+    });
+  }, []);
+
+  return <div>App Content</div>;
+}
+```
+  </TabItem>
+
+  <TabItem label="SolidJS">
+```tsx
+import { onMount, onCleanup, createSignal } from "solid-js";
+import truden from "truden";
+
+export default function App() {
+  const [image, setImage] = createSignal<Blob | null>(null);
+
+  onMount(() => {
+    const teardown = truden.init({
+      onResult: (blob: Blob) => setImage(blob),
+    });
+    onCleanup(() => teardown());
+  });
+
+  return <button onClick={() => truden.open()}>Snip Screen</button>;
+}
+```
+  </TabItem>
+
+  <TabItem label="Vanilla JS">
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <button id="snip-btn">Snip Screen</button>
+    <img id="preview" style="display: none; max-width: 400px;" />
+
+    <script type="module">
+      import truden from "truden";
+
+      truden.init({
+        onResult: (blob) => {
+          const img = document.getElementById("preview");
+          img.src = URL.createObjectURL(blob);
+          img.style.display = "block";
+        },
+      });
+
+      document.getElementById("snip-btn").addEventListener("click", () => {
+        truden.open();
+      });
+    </script>
+  </body>
+</html>
+```
+  </TabItem>
+</Tabs>
+
+---
+
+## Quickstart: Mode B (Vision LLM Route)
+
+Mode B sends the screenshot to your server route handler where any Vision LLM (OpenAI, Anthropic, OpenRouter, Gemini, Ollama) inspects it.
+
+<Tabs>
+  <TabItem label="Next.js (App Router)">
+```ts
+// app/api/truden/route.ts
+import { handler } from "truden/server";
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
+
+export const POST = handler({
+  analyze: async ({ image, prompt }) => {
+    const { text } = await generateText({
+      model: openai("gpt-4o"),
+      messages: [{ role: "user", content: [{ type: "image", image }, { type: "text", text: prompt }] }],
+    });
+    return text;
+  },
+});
+```
+  </TabItem>
+
+  <TabItem label="SvelteKit">
+```ts
+// src/routes/api/truden/+server.ts
+import { handler } from 'truden/server';
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
+export const POST = handler({
+  analyze: async ({ image, prompt }) => {
+    const { text } = await generateText({
+      model: openai('gpt-4o'),
+      messages: [{ role: 'user', content: [{ type: 'image', image }, { type: 'text', text: prompt }] }],
+    });
+    return text;
+  },
+});
+```
+  </TabItem>
+
+  <TabItem label="Nuxt 3">
+```ts
+// server/api/truden.post.ts
+import { handler } from 'truden/server';
+import OpenAI from 'openai';
+
+const client = new OpenAI();
+const trudenHandler = handler({
+  analyze: async ({ image, prompt }) => {
+    const res = await client.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: [{ type: "image_url", image_url: { url: image } }, { type: "text", text: prompt }] }]
+    });
+    return res.choices[0]?.message.content || "";
+  }
+});
+
+export default defineEventHandler(async (event) => {
+  return trudenHandler(toWebRequest(event));
+});
+```
+  </TabItem>
+
+  <TabItem label="TanStack Start">
+```ts
+// app/routes/api/truden.ts
+import { createAPIFileRoute } from '@tanstack/start/api';
+import { handler } from 'truden/server';
+
+const trudenHandler = handler({
+  analyze: async ({ image, prompt }) => {
+    return "Vision description from AI";
+  },
+});
+
+export const Route = createAPIFileRoute('/api/truden')({
+  POST: ({ request }) => trudenHandler(request),
+});
+```
+  </TabItem>
+
+  <TabItem label="Express / Node">
+```ts
+import { handler } from "truden/server";
+
+export const handleTruden = handler({
+  analyze: async ({ image, prompt }) => {
+    return "AI Vision Analysis";
+  },
+});
+```
+  </TabItem>
+</Tabs>

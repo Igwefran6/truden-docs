@@ -1,0 +1,62 @@
+---
+title: API & TypeScript Reference
+description: Complete reference for client and server APIs exported by truden.
+---
+
+Complete reference for functions, configurations, and TypeScript interfaces exported by `truden`.
+
+---
+
+## Client API: `truden.init(config)`
+
+Initializes Truden triggers and overlay listeners on the client. Returns a teardown function.
+
+```ts
+import truden from "truden";
+
+const teardown = truden.init(config?: TrudenConfig);
+```
+
+### `TrudenConfig` Options
+
+| Option | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `endpoint` | `string \| EndpointConfig` | `undefined` | Mode B backend route. If omitted, Mode A (`Blob`) is used. |
+| `shake` | `boolean \| ShakeConfig` | `true` | Alt + mouse shake gesture configuration. |
+| `shortcut` | `boolean \| string` | `"Ctrl+Shift+S"` | Keyboard shortcut combo. |
+| `customEvent` | `boolean \| string` | `"truden:open"` | Namespaced DOM event on `window`. |
+| `floatingButton` | `boolean \| FloatingButtonConfig` | `false` | Opt-in floating UI trigger button. |
+| `touch` | `boolean \| TouchConfig` | `true` | Touch long-press trigger (600ms). |
+| `onOpen` | `() => void` | `undefined` | Fired when overlay opens. |
+| `onCancel` | `() => void` | `undefined` | Fired when overlay is dismissed. |
+| `onResult` | `(result: Blob \| string) => void` | `undefined` | Delivers the `Blob` (Mode A) or `string` (Mode B). |
+| `onError` | `(error: unknown) => void` | `undefined` | Catches capture or network errors. |
+
+---
+
+## Programmatic API: `truden.open()`
+
+Programmatically triggers the screen-snip overlay without requiring a gesture or hotkey.
+
+```ts
+import truden from "truden";
+
+truden.open();
+```
+
+---
+
+## Server API: `truden.handler(config)`
+
+Creates a standard Web API `(req: Request) => Promise<Response>` route handler for Mode B.
+
+```ts
+import { handler } from "truden/server";
+
+export const POST = handler({
+  analyze: async ({ image, base64Data, prompt }) => {
+    // Custom Vision LLM logic
+    return "Analysis text";
+  },
+});
+```
