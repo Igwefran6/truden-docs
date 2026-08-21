@@ -1,0 +1,31 @@
+---
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+import { LinkButton } from '@astrojs/starlight/components';
+---
+
+<LinkButton href="/playground/" variant="primary" icon="rocket" class="header-playground-btn">
+	Playground
+</LinkButton>
+
+<Default {...Astro.props}><slot /></Default>
+
+<style>
+	:global(.header-playground-btn) {
+		font-size: 0.725rem !important;
+		padding: 0.2rem 0.65rem !important;
+		gap: 0.35rem !important;
+		margin-right: 0.6rem;
+		text-decoration: none !important;
+		line-height: 1 !important;
+	}
+	:global(.header-playground-btn svg) {
+		width: 0.85rem !important;
+		height: 0.85rem !important;
+	}
+	@media (max-width: 40rem) {
+		:global(.header-playground-btn) {
+			padding: 0.2rem 0.5rem !important;
+			font-size: 0.675rem !important;
+		}
+	}
+</style>

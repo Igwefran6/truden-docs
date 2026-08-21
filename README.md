@@ -1,49 +1,93 @@
-# Starlight Starter Kit: Basics
+# Truden Documentation
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Official documentation website for **[Truden](https://github.com/Igwefran6/truden)** — instant high-DPI screen snipping overlay and Vision LLM adapters for web applications.
 
+Built with **[Astro](https://astro.build)** and **[Starlight](https://starlight.astro.build)**.
+
+---
+
+## 🌟 Features
+
+- **100% Static HTML (SSG)**: Zero runtime server dependencies; deployable directly to any CDN or static hosting platform.
+- **Fast Client Search**: Instant full-text search powered by [Pagefind](https://pagefind.app/) running in WebAssembly.
+- **Multi-Framework Documentation**: Multi-tab code samples covering React, Next.js, Svelte, Vue, Angular, SolidJS, TanStack Start, and Vanilla JS.
+- **Branded Design**: Clean dark/light theme integration matching Truden's `#D843D8` mascot brand identity.
+- **Fully Type-Safe**: Validated with `@astrojs/check` and TypeScript strict mode.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Install Dependencies
+```bash
+pnpm install
 ```
-pnpm create astro@latest -- --template starlight
+
+### 2. Start Local Development Server
+```bash
+pnpm dev
+```
+Open `http://localhost:4321` in your browser to view the documentation site with live hot-reloading.
+
+### 3. Typecheck & Validate
+```bash
+pnpm exec astro check
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 4. Build for Production
+```bash
+pnpm run build
+```
+The optimized static bundle will be generated in `./dist/` alongside the search index and `sitemap-index.xml`.
 
-## 🚀 Project Structure
+### 5. Preview Production Build
+```bash
+pnpm run preview
+```
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+---
+
+## 📁 Project Structure
 
 ```
 .
-├── public/
+├── public/                     # Static public assets (favicons, robots.txt)
+│   └── favicon.svg
 ├── src/
-│   ├── assets/
+│   ├── assets/                 # Optimized vector & raster logos
+│   │   ├── truden-logo-gradient.svg
+│   │   └── truden-logo.png
+│   ├── components/             # Custom header components & overrides
+│   │   └── HeaderSocialIcons.astro
 │   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
+│   │   └── docs/               # Markdown/MDX documentation content
+│   │       ├── index.mdx       # Landing splash page
+│   │       ├── getting-started.mdx
+│   │       ├── triggers.mdx
+│   │       ├── mode-a.mdx
+│   │       ├── mode-b.mdx
+│   │       ├── playground.mdx
+│   │       ├── api-reference.mdx
+│   │       └── limitations.mdx
+│   └── styles/
+│       └── custom.css          # Custom #D843D8 palette & typography overrides
+├── astro.config.mjs            # Starlight & Astro configuration
 ├── package.json
 └── tsconfig.json
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+---
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+## 🚢 Deployment
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Because this project compiles to pure static HTML, CSS, and JS, you can deploy the `./dist/` directory to any static host:
 
-## 🧞 Commands
+- **GitHub Pages**: Set build output directory to `./dist` in GitHub Actions.
+- **Cloudflare Pages**: Set build command `pnpm run build` and output directory `dist`.
+- **Vercel / Netlify**: Select **Astro** preset with output directory `dist`.
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## 📄 License
 
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+MIT © [Francis Igwe](https://github.com/Igwefran6)

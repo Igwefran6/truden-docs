@@ -5,7 +5,6 @@ description: Explore all 5 built-in trigger mechanisms, gesture thresholds, and 
 
 Truden supports **5 trigger mechanisms** out of the box, in addition to direct programmatic control. All triggers funnel through the same shared capture overlay and can be individually configured or disabled.
 
----
 
 ## 1. Alt + Mouse Shake (Signature Gesture)
 
@@ -25,7 +24,6 @@ truden.init({
 });
 ```
 
----
 
 ## 2. Keyboard Shortcut
 
@@ -41,7 +39,6 @@ truden.init({
 });
 ```
 
----
 
 ## 3. Floating Trigger Button (Opt-in UI)
 
@@ -59,7 +56,6 @@ truden.init({
 });
 ```
 
----
 
 ## 4. Custom DOM Event
 
@@ -73,7 +69,6 @@ truden.init({ customEvent: "truden:open" });
 window.dispatchEvent(new CustomEvent("truden:open"));
 ```
 
----
 
 ## 5. Touch Long-Press (Mobile / Tablet)
 
@@ -89,7 +84,6 @@ truden.init({
 });
 ```
 
----
 
 ## 6. Programmatic Trigger: `truden.open()`
 
@@ -99,7 +93,6 @@ import truden from "truden";
 truden.open();
 ```
 
----
 
 ## Disabling Triggers
 

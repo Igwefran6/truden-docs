@@ -7,7 +7,6 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 **Mode B** automatically sends captured screenshots to a backend route handler that analyzes the image with a Vision LLM and returns a textual description.
 
----
 
 ## How It Works
 
@@ -21,7 +20,6 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 Client Snip ───► POST /api/truden ───► Vision LLM ───► { description } ───► Client onResult(text)
 ```
 
----
 
 ## Server Route Handler Recipes
 

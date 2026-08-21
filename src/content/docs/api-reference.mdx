@@ -5,7 +5,6 @@ description: Complete reference for client and server APIs exported by truden.
 
 Complete reference for functions, configurations, and TypeScript interfaces exported by `truden`.
 
----
 
 ## Client API: `truden.init(config)`
 
@@ -32,7 +31,6 @@ const teardown = truden.init(config?: TrudenConfig);
 | `onResult` | `(result: Blob \| string) => void` | `undefined` | Delivers the `Blob` (Mode A) or `string` (Mode B). |
 | `onError` | `(error: unknown) => void` | `undefined` | Catches capture or network errors. |
 
----
 
 ## Programmatic API: `truden.open()`
 
@@ -43,8 +41,6 @@ import truden from "truden";
 
 truden.open();
 ```
-
----
 
 ## Server API: `truden.handler(config)`
 
