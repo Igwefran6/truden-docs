@@ -13,7 +13,7 @@ importers:
         version: 6.0.4(@types/node@24.13.3)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(yaml@2.9.0)
       '@astrojs/starlight':
         specifier: ^0.41.7
-        version: 0.41.7(@astrojs/markdown-remark@7.2.4)(astro@7.2.4(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0))(typescript@5.7.3)
+        version: 0.41.7(@astrojs/markdown-remark@7.2.4)(astro@7.2.4(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0))(typescript@5.9.3)
       astro:
         specifier: ^7.1.6
         version: 7.2.4(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0)
@@ -29,7 +29,7 @@ importers:
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.10
-        version: 0.9.10(prettier@3.9.6)(typescript@5.7.3)
+        version: 0.9.10(prettier@3.9.6)(typescript@5.9.3)
       '@types/react':
         specifier: ^19.2.18
         version: 19.2.18
@@ -38,7 +38,7 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       typescript:
         specifier: ^5.7.3
-        version: 5.7.3
+        version: 5.9.3
 
 packages:
 
@@ -2233,8 +2233,8 @@ packages:
   typescript-auto-import-cache@0.3.6:
     resolution: {integrity: sha512-RpuHXrknHdVdK7wv/8ug3Fr0WNsNi5l5aB8MYYuXhq2UH5lnEB1htJ1smhtD5VeCsGr2p8mUDtd83LCQDFVgjQ==}
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2578,12 +2578,12 @@ packages:
 
 snapshots:
 
-  '@astrojs/check@0.9.10(prettier@3.9.6)(typescript@5.7.3)':
+  '@astrojs/check@0.9.10(prettier@3.9.6)(typescript@5.9.3)':
     dependencies:
-      '@astrojs/language-server': 2.16.14(prettier@3.9.6)(typescript@5.7.3)
+      '@astrojs/language-server': 2.16.14(prettier@3.9.6)(typescript@5.9.3)
       chokidar: 4.0.3
       kleur: 4.1.5
-      typescript: 5.7.3
+      typescript: 5.9.3
       yargs: 18.1.0
     transitivePeerDependencies:
       - prettier
@@ -2656,12 +2656,12 @@ snapshots:
       smol-toml: 1.8.0
       unified: 11.0.5
 
-  '@astrojs/language-server@2.16.14(prettier@3.9.6)(typescript@5.7.3)':
+  '@astrojs/language-server@2.16.14(prettier@3.9.6)(typescript@5.9.3)':
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/yaml2ts': 0.2.4
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@volar/kit': 2.4.28(typescript@5.7.3)
+      '@volar/kit': 2.4.28(typescript@5.9.3)
       '@volar/language-core': 2.4.28
       '@volar/language-server': 2.4.28
       '@volar/language-service': 2.4.28
@@ -2768,7 +2768,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 4.4.3
 
-  '@astrojs/starlight@0.41.7(@astrojs/markdown-remark@7.2.4)(astro@7.2.4(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0))(typescript@5.7.3)':
+  '@astrojs/starlight@0.41.7(@astrojs/markdown-remark@7.2.4)(astro@7.2.4(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0))(typescript@5.9.3)':
     dependencies:
       '@astrojs/markdown-satteri': 0.3.7
       '@astrojs/mdx': 7.0.7(@astrojs/markdown-satteri@0.3.7)(astro@7.2.4(@astrojs/markdown-remark@7.2.4)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.3)(yaml@2.9.0))
@@ -2784,7 +2784,7 @@ snapshots:
       hast-util-select: 6.0.4
       hast-util-to-string: 3.0.1
       hastscript: 9.0.1
-      i18next: 26.4.0(typescript@5.7.3)
+      i18next: 26.4.0(typescript@5.9.3)
       js-yaml: 4.3.1
       klona: 2.0.6
       magic-string: 0.30.21
@@ -3529,12 +3529,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@volar/kit@2.4.28(typescript@5.7.3)':
+  '@volar/kit@2.4.28(typescript@5.9.3)':
     dependencies:
       '@volar/language-service': 2.4.28
       '@volar/typescript': 2.4.28
       typesafe-path: 0.2.2
-      typescript: 5.7.3
+      typescript: 5.9.3
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
 
@@ -4252,9 +4252,9 @@ snapshots:
 
   http-cache-semantics@4.2.0: {}
 
-  i18next@26.4.0(typescript@5.7.3):
+  i18next@26.4.0(typescript@5.9.3):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.9.3
 
   inline-style-parser@0.2.7: {}
 
@@ -5335,7 +5335,7 @@ snapshots:
     dependencies:
       semver: 7.8.5
 
-  typescript@5.7.3: {}
+  typescript@5.9.3: {}
 
   ufo@1.6.4: {}
 
