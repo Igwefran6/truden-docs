@@ -11,8 +11,10 @@
 	--sl-color-accent-high: #540854;
 }
 
-/* Tighten header logo-to-title spacing */
+/* Header Branding & Beta Badge */
 .site-title {
+	display: inline-flex !important;
+	align-items: center !important;
 	gap: 0.5rem !important;
 }
 
@@ -23,4 +25,23 @@
 
 .site-title span {
 	color: var(--sl-color-white);
+	font-weight: 700;
+}
+
+.site-title::after {
+	content: 'BETA';
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.625rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	padding: 0.15rem 0.45rem;
+	border-radius: 999rem;
+	background-color: var(--sl-color-accent-low);
+	color: var(--sl-color-accent);
+	border: 1px solid var(--sl-color-accent);
+	line-height: 1;
+	vertical-align: middle;
+	margin-left: 0.25rem;
 }
