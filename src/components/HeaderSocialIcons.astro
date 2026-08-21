@@ -1,9 +1,10 @@
 ---
 import Default from '@astrojs/starlight/components/SocialIcons.astro';
 import { LinkButton } from '@astrojs/starlight/components';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<LinkButton href="/playground/" variant="primary" icon="rocket" class="header-playground-btn">
+<LinkButton href={`${base}/playground/`} variant="primary" icon="rocket" class="header-playground-btn">
 	Playground
 </LinkButton>
 

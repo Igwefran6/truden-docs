@@ -5,7 +5,8 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://truden.dev',
+	site: 'https://igwefran6.github.io',
+	base: '/truden-docs',
 	integrations: [
 		react(),
 		starlight({
